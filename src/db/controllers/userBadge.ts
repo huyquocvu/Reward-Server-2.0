@@ -9,14 +9,15 @@ const userBadgeController = {
     userSelector: Prisma.userWhereUniqueInput,
     badgeSelector: Prisma.badgeWhereUniqueInput
   ) {
-    const u: any = await user.findFirst({
+    try {
+    const u:any = await user.findFirst({
       where: userSelector,
       include: {
         userBadge: true,
       },
     });
-    for (let i = 0; i <= u.userBadge.length; i++) {
-      if (u.userBadge[i].badgeId === badgeSelector.id) {
+    for (let i = 0; i < u.userBadge.length; i++) {
+      if (u.userBadge.length && u.userBadge[i].badgeId === badgeSelector.id) {
         return 'Already Enrolled in This Reward';
       }
     }
@@ -36,6 +37,9 @@ const userBadgeController = {
     };
     const e = await userBadge.create(args);
     return `Added new Reward to User ${e}`;
+  } catch (error) {
+      console.warn(error);
+  }
   },
 
   getUserBadges: async function (userSelector: Prisma.userWhereUniqueInput) {
@@ -92,10 +96,10 @@ const userBadgeController = {
     });
   },
 
-  deleteUserBadge: async function (userBadgeId: number) {
+  deleteUserBadge: async function (userBadgeSelector: Prisma.userBadgeWhereUniqueInput) {
     await userBadge
       .delete({
-        where: { id: userBadgeId },
+        where: userBadgeSelector,
       })
       .catch((err) => {
         return `Failed to delete Badge ${err}`;

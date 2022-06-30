@@ -2,9 +2,9 @@ import { Prisma } from '@prisma/client';
 import { prisma } from '../dbConn';
 const {badge} = prisma;
 const badgeController = {
-    createBadge: async function(newBadge: Prisma.badgeCreateInput){
+    createBadge: async function(data: Prisma.badgeCreateInput){
         return await badge.create({
-            data: newBadge
+            data: data
         });
     },
     getBadges: async function(){

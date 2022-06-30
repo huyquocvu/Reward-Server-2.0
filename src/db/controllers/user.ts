@@ -11,7 +11,11 @@ const userController = {
    getUsers: async function() {
     const users = await user.findMany({
       include: {
-        userBadge: true,
+        userBadge: {
+          include:{
+            badge: true
+          }
+        },
       },
     });
     return users;
@@ -27,8 +31,8 @@ const userController = {
   ) {
     return await user.update({ data: data, where: where });
   },
-  deleteUser: async function(args: Prisma.userDeleteArgs){
-    return await user.delete(args);
+  deleteUser: async function(where: Prisma.userWhereUniqueInput){
+    return await user.delete({where: where});
    }
 }
 

@@ -1,0 +1,1 @@
+mysql -uroot -p < ./01.sql && mysql -uroot -p < ./02.sql

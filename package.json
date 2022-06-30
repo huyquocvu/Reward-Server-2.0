@@ -1,7 +1,11 @@
 {
   "name": "rfid2",
   "scripts": {
+    "start": "npx ts-node ./src/index.ts",
     "build": "tsc -p ."
+  },
+  "prisma": {
+    "schema": "src/db/schema.prisma"
   },
   "version": "1.0.0",
   "main": "./dist/index.js",

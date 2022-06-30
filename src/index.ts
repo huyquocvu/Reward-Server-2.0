@@ -10,12 +10,14 @@ const port = process.env.PORT;
 app.use(express.json())
 
 app.use('/user', routers.user);
+app.use('/badge', routers.badge)
+app.use('/userBadge', routers.userBadge)
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Express + Typescript Server');
 });
 
 app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running @ https://localhost:3000/`)
+    console.log(`⚡️ Server is running @ https://localhost:3000/ ⚡️`)
 });
 
