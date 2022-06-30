@@ -11,8 +11,10 @@ const badgeController = {
         const badges = await badge.findMany();
         return badges;
     },
-    getBadge: async function(args: Prisma.badgeFindFirstArgs) {
-        return await badge.findFirst(args);
+    getBadge: async function(badgeSelector: Prisma.badgeWhereUniqueInput) {
+        return await badge.findFirst({
+            where: badgeSelector
+        });
     },
     updateBadge: async function(data: Prisma.userUpdateInput, where: Prisma.userWhereUniqueInput){
         return await badge.update({

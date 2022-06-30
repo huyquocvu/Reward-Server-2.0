@@ -20,7 +20,7 @@ badgeRouter.get('/', async (req: Request, res: Response) => {
   const data = await getBadge(req.body);
   data
     ? res.send(JSON.stringify(data))
-    : res.status(404).send('User Not Found');
+    : res.status(404).send('Badge Not Found');
 });
 
 badgeRouter.put('/', async (req: Request, res: Response) => {

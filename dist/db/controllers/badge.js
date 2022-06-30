@@ -26,9 +26,11 @@ const badgeController = {
             return badges;
         });
     },
-    getBadge: function (args) {
+    getBadge: function (badgeSelector) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield badge.findFirst(args);
+            return yield badge.findFirst({
+                where: badgeSelector
+            });
         });
     },
     updateBadge: function (data, where) {

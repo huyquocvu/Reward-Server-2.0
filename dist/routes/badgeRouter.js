@@ -28,7 +28,7 @@ badgeRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* (
     const data = yield getBadge(req.body);
     data
         ? res.send(JSON.stringify(data))
-        : res.status(404).send('User Not Found');
+        : res.status(404).send('Badge Not Found');
 }));
 badgeRouter.put('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { input, where } = req.body;

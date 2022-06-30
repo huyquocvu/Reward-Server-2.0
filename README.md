@@ -2,5 +2,6 @@
 
 ## Start-Up
 
-- run ./init/init.sh
-- yarn start
+```./init/init.sh```
+
+  ```yarn start```
