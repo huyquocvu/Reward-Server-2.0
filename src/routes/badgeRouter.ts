@@ -3,10 +3,11 @@ import { Router, Request, Response } from 'express';
 import { badgeController } from '../db/controllers';
 const badgeRouter = Router();
 
-const { createBadge, getBadge, getBadges, updateBadge, deleteBadge } = badgeController;
+const { createBadge, getBadge, getBadges, updateBadge, deleteBadge } =
+  badgeController;
 
 badgeRouter.post('/', async (req: Request, res: Response) => {
-  const newBadge: Prisma.badgeCreateInput = req.body
+  const newBadge: Prisma.badgeCreateInput = req.body;
   const data = await createBadge(newBadge);
   data ? res.send(JSON.stringify(data)) : res.status(400).send('Bad Request');
 });
@@ -31,11 +32,11 @@ badgeRouter.put('/', async (req: Request, res: Response) => {
     : res.status(500).send('Could not update');
 });
 
-badgeRouter.delete('/', async(req: Request, res: Response) => {
-  const data = await deleteBadge(req.body)
+badgeRouter.delete('/', async (req: Request, res: Response) => {
+  const data = await deleteBadge(req.body);
   data
-  ? res.send(JSON.stringify(data))
-  : res.status(500).send('Could not Delete');
-})
+    ? res.send(JSON.stringify(data))
+    : res.status(500).send('Could not Delete');
+});
 
 export { badgeRouter };

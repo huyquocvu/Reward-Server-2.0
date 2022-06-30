@@ -1,11 +1,11 @@
 import { userRouter } from './userRouter';
 import { badgeRouter } from './badgeRouter';
-import {userBadgeRouter} from './userBadgeRouter'
+import { userBadgeRouter } from './userBadgeRouter';
 
 const routers = {
-    user: userRouter,
-    badge: badgeRouter,
-    userBadge: userBadgeRouter
-}
+  user: userRouter,
+  badge: badgeRouter,
+  userBadge: userBadgeRouter,
+};
 
-export {routers}
+export { routers };

@@ -34,11 +34,13 @@ const userController = {
     try {
       return await user.findFirst({
         where: userSelector,
-        include: {userBadge: {
-          include: {
-            badge: true
-          }
-        }}
+        include: {
+          userBadge: {
+            include: {
+              badge: true,
+            },
+          },
+        },
       });
     } catch (error) {
       console.warn(error);
