@@ -2,6 +2,8 @@
 
 ## Start-Up
 
+```yarn install```
+
 ```./init/init.sh```
 
   ```yarn start```
