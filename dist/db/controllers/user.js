@@ -15,41 +15,71 @@ const { user } = dbConn_1.prisma;
 const userController = {
     createUser: function (newUser) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user.create({
-                data: newUser,
-            });
+            try {
+                return yield user.create({
+                    data: newUser,
+                });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     getUsers: function () {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield user.findMany({
-                include: {
-                    userBadge: {
-                        include: {
-                            badge: true
-                        }
+            try {
+                const users = yield user.findMany({
+                    include: {
+                        userBadge: {
+                            include: {
+                                badge: true,
+                            },
+                        },
                     },
-                },
-            });
-            return users;
+                });
+                return users;
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     getUser: function (userSelector) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user.findFirst({
-                where: userSelector
-            });
+            try {
+                return yield user.findFirst({
+                    where: userSelector,
+                });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     updateUser: function (data, where) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user.update({ data: data, where: where });
+            try {
+                return yield user.update({ data: data, where: where });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     deleteUser: function (where) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield user.delete({ where: where });
+            try {
+                return yield user.delete({ where: where });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
-    }
+    },
 };
 exports.userController = userController;

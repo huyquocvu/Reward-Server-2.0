@@ -46,70 +46,95 @@ const userBadgeController = {
             }
             catch (error) {
                 console.warn(error);
+                return;
             }
         });
     },
     getUserBadges: function (userSelector) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield userBadge.findMany({
-                where: userSelector,
-            });
+            try {
+                return yield userBadge.findMany({
+                    where: userSelector,
+                });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     getUserBadge: function (userBadgeSelector) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield userBadge.findFirst({ where: userBadgeSelector });
+            try {
+                return yield userBadge.findFirst({ where: userBadgeSelector });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     updateUserBadge: function (updateType, userBadgeSelector) {
         return __awaiter(this, void 0, void 0, function* () {
-            const curr = yield userBadgeController.getUserBadge(userBadgeSelector);
-            let data = {};
-            if (updateType === 'Collect') {
-                if ((curr === null || curr === void 0 ? void 0 : curr.isCollected) === true) {
-                    return 'Already Collected Badge';
+            try {
+                const curr = yield userBadgeController.getUserBadge(userBadgeSelector);
+                let data = {};
+                if (updateType === 'Collect') {
+                    if ((curr === null || curr === void 0 ? void 0 : curr.isCollected) === true) {
+                        return 'Already Collected Badge';
+                    }
+                    data = {
+                        isCollected: true,
+                        collectedAt: new Date(),
+                    };
                 }
-                data = {
-                    isCollected: true,
-                    collectedAt: new Date(),
-                };
-            }
-            else if (updateType === 'Redeem') {
-                if ((curr === null || curr === void 0 ? void 0 : curr.isCollected) === false) {
-                    return 'Must Collect Badge before Redeeming!';
+                else if (updateType === 'Redeem') {
+                    if ((curr === null || curr === void 0 ? void 0 : curr.isCollected) === false) {
+                        return 'Must Collect Badge before Redeeming!';
+                    }
+                    if ((curr === null || curr === void 0 ? void 0 : curr.isRedeemed) === true) {
+                        return 'Already Collected Badge & Redeemed Reward!';
+                    }
+                    data = {
+                        isRedeemed: true,
+                        redeemedAt: new Date(),
+                    };
                 }
-                if ((curr === null || curr === void 0 ? void 0 : curr.isRedeemed) === true) {
-                    return 'Already Collected Badge & Redeemed Reward!';
+                else if (updateType === 'Reset') {
+                    data = {
+                        isRedeemed: false,
+                        redeemedAt: null,
+                        isCollected: false,
+                        collectedAt: null,
+                    };
                 }
-                data = {
-                    isRedeemed: true,
-                    redeemedAt: new Date(),
-                };
+                return yield userBadge.update({
+                    where: userBadgeSelector,
+                    data: data,
+                });
             }
-            else if (updateType === 'Reset') {
-                data = {
-                    isRedeemed: false,
-                    redeemedAt: null,
-                    isCollected: false,
-                    collectedAt: null,
-                };
+            catch (error) {
+                console.warn(error);
+                return;
             }
-            return yield userBadge.update({
-                where: userBadgeSelector,
-                data: data,
-            });
         });
     },
     deleteUserBadge: function (userBadgeSelector) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield userBadge
-                .delete({
-                where: userBadgeSelector,
-            })
-                .catch((err) => {
-                return `Failed to delete Badge ${err}`;
-            });
-            return 'Deleted Badge';
+            try {
+                yield userBadge
+                    .delete({
+                    where: userBadgeSelector,
+                })
+                    .catch((err) => {
+                    return `Failed to delete Badge ${err}`;
+                });
+                return 'Deleted Badge';
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
 };

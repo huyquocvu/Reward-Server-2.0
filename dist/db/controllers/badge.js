@@ -15,34 +15,62 @@ const { badge } = dbConn_1.prisma;
 const badgeController = {
     createBadge: function (data) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield badge.create({
-                data: data
-            });
+            try {
+                return yield badge.create({
+                    data: data
+                });
+            }
+            catch (error) {
+                console.warn(error);
+            }
         });
     },
     getBadges: function () {
         return __awaiter(this, void 0, void 0, function* () {
-            const badges = yield badge.findMany();
-            return badges;
+            try {
+                const badges = yield badge.findMany();
+                return badges;
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     getBadge: function (badgeSelector) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield badge.findFirst({
-                where: badgeSelector
-            });
+            try {
+                return yield badge.findFirst({
+                    where: badgeSelector
+                });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     updateBadge: function (data, where) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield badge.update({
-                data: data, where: where
-            });
+            try {
+                return yield badge.update({
+                    data: data, where: where
+                });
+            }
+            catch (error) {
+                console.warn(error);
+                return;
+            }
         });
     },
     deleteBadge: function (where) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield badge.delete({ where: where });
+            try {
+                return yield badge.delete({ where: where });
+            }
+            catch (error) {
+                console.warn(error);
+            }
         });
     }
 };

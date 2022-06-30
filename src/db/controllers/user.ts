@@ -3,38 +3,62 @@ import { prisma } from '../dbConn';
 
 const { user } = prisma;
 const userController = {
-  createUser: async function(newUser: Prisma.userCreateInput) {
-    return await user.create({
-       data: newUser,
-     });
-   },
-   getUsers: async function() {
-    const users = await user.findMany({
-      include: {
-        userBadge: {
-          include:{
-            badge: true
-          }
+  createUser: async function (newUser: Prisma.userCreateInput) {
+    try {
+      return await user.create({
+        data: newUser,
+      });
+    } catch (error) {
+      console.warn(error);
+      return;
+    }
+  },
+  getUsers: async function () {
+    try {
+      const users = await user.findMany({
+        include: {
+          userBadge: {
+            include: {
+              badge: true,
+            },
+          },
         },
-      },
-    });
-    return users;
+      });
+      return users;
+    } catch (error) {
+      console.warn(error);
+      return;
+    }
   },
-  getUser: async function(userSelector: Prisma.userWhereUniqueInput) {
-    return await user.findFirst({
-      where: userSelector
-    });
+  getUser: async function (userSelector: Prisma.userWhereUniqueInput) {
+    try {
+      return await user.findFirst({
+        where: userSelector,
+      });
+    } catch (error) {
+      console.warn(error);
+      return;
+    }
   },
-  updateUser: async function(
+  updateUser: async function (
     data: Prisma.userUpdateInput,
     where: Prisma.userWhereUniqueInput
   ) {
-    return await user.update({ data: data, where: where });
+    try {
+      return await user.update({ data: data, where: where });
+    } catch (error) {
+      console.warn(error);
+      return;
+    }
   },
-  deleteUser: async function(where: Prisma.userWhereUniqueInput){
-    return await user.delete({where: where});
-   }
-}
+  deleteUser: async function (where: Prisma.userWhereUniqueInput) {
+    try {
+      return await user.delete({ where: where });
+    } catch (error) {
+      console.warn(error);
+      return;
+    }
+  },
+};
 
-
-export {userController};
+export { userController };
