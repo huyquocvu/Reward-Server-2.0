@@ -9,7 +9,7 @@ datasource db {
 
 model badge {
   id          Int         @id @default(autoincrement())
-  badgeName   String?     @db.VarChar(50)
+  badgeName   String?     @unique(map: "badgeName") @db.VarChar(50)
   description String?     @db.TinyText
   userBadge   userBadge[]
 }

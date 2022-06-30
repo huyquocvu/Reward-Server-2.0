@@ -51,6 +51,11 @@ const userController = {
             try {
                 return yield user.findFirst({
                     where: userSelector,
+                    include: { userBadge: {
+                            include: {
+                                badge: true
+                            }
+                        } }
                 });
             }
             catch (error) {

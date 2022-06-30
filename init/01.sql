@@ -18,7 +18,7 @@ CREATE TABLE
 CREATE TABLE
     badge (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        badgeName VARCHAR(50),
+        badgeName VARCHAR(50) UNIQUE,
         description TINYTEXT
     );
 
