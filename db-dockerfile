@@ -1,0 +1,5 @@
+COPY ./init /init
+WORKDIR /init
+RUN chmod 711 /init/init.sh
+RUN ./init/init.sh
+

@@ -20,4 +20,14 @@
 
 ```./init/init.sh```
 
-  ```yarn start```
+```yarn start```
+
+## Starting with Docker
+
+The provided docker-compose and dockerfile will create two containers for the app and db services
+
+Simply run
+```docker compose up```
+To launch the db and app services. Note that if the app is unable to communicate with the db that the correct IP address for the db container must be provided in the .env file
+
+
